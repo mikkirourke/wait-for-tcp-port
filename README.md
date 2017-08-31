@@ -1,6 +1,6 @@
 # wait-for-tcp-port
 
-Wait for tcp port is a promise based library for waiting for one/more hosts/ports to become available. I uses nmap utility for network discovery. The ```bash waitForPort``` function checks only if the ports are opened and  doesn't try to establish connection, that decrease the waiting time.  
+Wait for tcp port is a promise based library for waiting for one/more hosts/ports to become available. I uses nmap utility for network discovery. The ```waitForPort``` function checks only if the ports are opened and  doesn't try to establish connection, that decrease the waiting time.  
 
 ## Installation
 
@@ -33,7 +33,7 @@ Wait for port result { errors: 0,
 
 ```
 ## API
-async waitForPort(tcpResources[,options])
+### async waitForPort(tcpResources[,options])
  - `tcpResources` is an array consisting of the list of the ports to check, in the format 'host:port'
  - `options` is an object consisting of
    - `timeout` - the maximum time to wait for the open ports in milliseconds. Default value is 120000(2 minutes)
@@ -42,10 +42,10 @@ async waitForPort(tcpResources[,options])
 
 #### Return value
 Returns an object
-  - `errors` indicates the number of instances for which errors occurred while scanning ssh ports
+  - `errors` indicates the number of instances for which errors occurred while scanning the ports
   - `servers` an array of objects corresponding to each instance
     - `ip` the ip or dns of the server.
     - `port` the port checked to be opened.
     - `tries` the number of tries to scan the ports. This field is used in tests.
-    - `status`: can be 'open' or 'error'.
-    - `error` : is the error that occurred. This field is present only if status is 'error'.
+    - `status` can be 'open' or 'error'.
+    - `error`  is the error that occurred. This field is present only if status is 'error'.
