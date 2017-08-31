@@ -78,6 +78,7 @@ async function waitForPort(resources, options) {
           status: res.status
         });
       }
+      
     }
     if(tcpResources.size === 0) {
       return {
@@ -86,8 +87,15 @@ async function waitForPort(resources, options) {
       }
     }
   }
+
+  const checkedServersString = checkedServers.map(function(item) {return JSON.stringify(item)}).join()
   
-  throw new Error('Timeout of ' + timeout + ' exceded. Checked servers:\n' + checkedServers + '')
+  let notAvailableServers = []
+  for(const server of tcpResources.values()) {
+    notAvailableServers.push(JSON.stringify(server))
+  }
+  
+  throw new Error('Timeout of ' + timeout + ' exceded.\nChecked servers:\n' + checkedServersString + '\nNot available servers:\n' + notAvailableServers + '')
 }
 
 
