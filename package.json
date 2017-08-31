@@ -1,7 +1,7 @@
 {
-  "name": "server-provider",
-  "version": "0.4.0",
-  "description": "Batch creation of server instances on various cloud providers",
+  "name": "wait-for-tcp-port",
+  "version": "0.1.0",
+  "description": "Nmap based waiting for a list of servers to have opened the specified ports",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel ./src --out-dir dist",
@@ -10,16 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/slava-t/server-provider.git"
+    "url": "https://github.com/mikkirourke/wait-for-tcp-port.git"
   },
-  "author": "SlavaT",
+  "author": "mikkirourke",
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "do-wrapper": "^3.11.1",
-    "linode-api": "^0.1.2",
-    "merge": "^1.2.0",
-    "node-uuid": "^1.4.8",
     "sleep-promise": "^2.0.0"
   },
   "devDependencies": {
