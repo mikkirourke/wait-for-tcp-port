@@ -1,6 +1,6 @@
 {
   "name": "wait-for-tcp-port",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nmap based waiting for a list of servers to have opened the specified ports",
   "main": "dist/index.js",
   "scripts": {

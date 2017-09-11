@@ -88,10 +88,12 @@ async function waitForPort(resources, options) {
     }
   }
 
-  const checkedServersString = checkedServers.map(function(item) {return JSON.stringify(item)}).join()
+  const checkedServersString = checkedServers.map(function(item) {return JSON.stringify(item)})
   
   let notAvailableServers = []
   for(const server of tcpResources.values()) {
+    server['tries'] = tries
+    server['status'] = 'close'
     notAvailableServers.push(JSON.stringify(server))
   }
   
