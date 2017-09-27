@@ -16,7 +16,8 @@ describe('Wait for port', function() {
       portStatus = 'open';
     }, 300);
 
-    const res = await waitForPort(['example.com:80'], {
+    const res = await waitForPort({
+      resources: ['example.com:80'],
       timeout: 1000,
       interval: 5,
       portStatusFunction: getPortStatus
@@ -36,7 +37,8 @@ describe('Wait for port', function() {
         return {status: portStatus};
       };
 
-      const res = await waitForPort(['example.com:80'], {
+      const res = await waitForPort({
+        resources: ['example.com:80'], 
         timeout: 1000,
         interval: 5,
         portStatusFunction: getPortStatus
@@ -59,7 +61,8 @@ describe('Wait for port', function() {
       portStatus = 'open';
     }, 300);
 
-    const res = await waitForPort(['example.com:80','example.com:443'], {
+    const res = await waitForPort({
+      resources: ['example.com:80','example.com:443'], 
       timeout: 1000,
       interval: 5,
       portStatusFunction: getPortStatus
@@ -87,7 +90,8 @@ describe('Wait for port', function() {
         portStatus = 'open';
       }, 300);
 
-      const res = await waitForPort(['example.com:80','example.com:22'], {
+      const res = await waitForPort({
+        resources: ['example.com:80','example.com:22'], 
         timeout: 1000,
         interval: 5,
         portStatusFunction: getPortStatus

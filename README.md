@@ -16,8 +16,10 @@ import waitForPort from 'wait-for-tcp-port';
 
 const resources = ['example.com:80','example.com:443']
 
-waitForPort(resources,{timeout: 40000})
-.then(function(res) {
+waitForPort({
+  resources:resources,
+  timeout: 40000
+}).then(function(res) {
   console.log('Wait for port result',res)
 })
 .catch(function(err) {
@@ -33,9 +35,9 @@ Wait for port result { errors: 0,
 
 ```
 ## API
-### async waitForPort(tcpResources[,options])
- - `tcpResources` is an array consisting of the list of the ports to check, in the format 'host:port'
+### async waitForPort(options)
  - `options` is an object consisting of
+   - `resources` is an array consisting of the list of the ports to check, in the format 'host:port'
    - `timeout` - the maximum time to wait for the open ports in milliseconds. Default value is 120000(2 minutes)
    - `interval` - the interval for scanning the ports in milliseconds. Defalut value is 10000(every 10 seconds)
    - `portStatusFunction` - a custom function to be used for checking the availability

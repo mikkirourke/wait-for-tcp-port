@@ -29,8 +29,9 @@ function getPortStatus(ip, port) {
   });
 }
 
-async function waitForPort(resources, options) {
+async function waitForPort(options) {
   const o = options || {};
+  const resources = o.resources || [];
   const timeout = o.timeout || 120 * 1000; //120 seconds
   const interval = o.interval || 10 * 1000; //try every 10 seconds
   const portStatusFunction = o.portStatusFunction || getPortStatus;
