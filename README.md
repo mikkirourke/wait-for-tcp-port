@@ -16,7 +16,7 @@ npm install --save wait-for-tcp-port
 ##### Waiting for a list of hosts/ports to be available
 
 ```js
-import {waitForPort} from 'wait-for-tcp-port';
+import waitForPort from 'wait-for-tcp-port';
 
 const resources = ['example.com:80','example.com:443']
 
