@@ -3,7 +3,7 @@ import childProcess from 'child_process';
 
 const exec = childProcess.exec;
 
-function getPortStatus(ip, port) {
+function getPortStatusNmap(ip, port) {
   return new Promise(function(resolve, reject) {
     try {
       const cmd = 'nmap -p ' + port + ' ' + ip +
@@ -29,12 +29,42 @@ function getPortStatus(ip, port) {
   });
 }
 
+function getPortStatusNc(ip, port) {
+  return new Promise(function(resolve, reject) {
+    try {
+      const cmd = 'nc -z -w1 ' + ip + ' ' + port + ';echo $?'
+      exec(cmd, function(error, stdout, stderr) {
+        if(error) {
+          return resolve({
+            status: 'error',
+            error: error
+          });
+        } 
+        if(Number(stdout.trim()) === 0) {
+          return resolve({
+            status: 'open'
+          });
+        } else {
+          return resolve({
+            status: 'close'
+          });
+        }
+      });
+    } catch(err) {
+      return resolve({
+        status: 'error',
+        error: err
+      });
+    }
+  });
+}
+
 async function waitForPort(options) {
   const o = options || {};
   const resources = o.resources || [];
   const timeout = o.timeout || 120 * 1000; //120 seconds
   const interval = o.interval || 10 * 1000; //try every 10 seconds
-  const portStatusFunction = o.portStatusFunction || getPortStatus;
+  const portStatusFunction = o.portStatusFunction || getPortStatusNc;
   const tcpResources = new Set();
 
   for(const resource of resources) {
@@ -102,4 +132,8 @@ async function waitForPort(options) {
 }
 
 
-export default waitForPort
+export  {
+  getPortStatusNmap,
+  getPortStatusNc,
+  waitForPort 
+}
