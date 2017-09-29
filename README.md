@@ -1,6 +1,7 @@
 # wait-for-tcp-port
 
 Wait for tcp port is a promise based library for waiting for one/more hosts/ports to become available. The ```waitForPort``` function checks only if the ports are opened and  doesn't try to establish connection, that decrease the waiting time. In the library are present two functions for checking the port availability: 
+
   ```getPortStatusNmap``` - uses nmap utility 
   ```getPortStatusNc``` - uses netcat utility
 The default one used in ```waitForPort``` function is ```getPortStatusNc```
@@ -57,7 +58,8 @@ Returns an object
 
 If the timeout exceeded an error will be thrown.
 
-###function getPortStatusNmap(ip,port) 
+### function getPortStatusNmap(ip,port)
+
  - `ip` the ip or dns of the server.
  - `port` the port to be checked
 
@@ -66,7 +68,8 @@ Returns a resolved promise with the resulting value an object containing:
     - `status` can be 'open','close' or 'error'.
     - `error`  is the error that occurred. This field is present only if status is 'error'.
 
-###function getPortStatusNc(ip,port) 
+### function getPortStatusNc(ip,port)
+
  - `ip` the ip or dns of the server.
  - `port` the port to be checked
 
