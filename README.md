@@ -1,6 +1,6 @@
 # wait-for-tcp-port
 
-Wait for tcp port is a promise based library for waiting for one/more hosts/ports to become available. The ```waitForPort``` function checks only if the ports are opened and  doesn't try to establish connection, that decrease the waiting time.
+Wait for tcp port is a promise based library for waiting for one/more hosts/ports to become available. The ```waitForPort``` function checks only if the ports are opened and  doesn't try to establish connection, that decrease the waiting time. By default it uses netcat utility for network discovery.
 
 ## Installation
 
@@ -41,7 +41,7 @@ Wait for port result { errors: 0,
    - `resources` is an array consisting of the list of the ports to check, in the format 'host:port'
    - `timeout` - the maximum time to wait for the open ports in milliseconds. Default value is 120000(2 minutes)
    - `interval` - the interval for scanning the ports in milliseconds. Defalut value is 10000(every 10 seconds)
-   - `method` - the utility used for checking the port status. Available values are : 'netcat','nmap'. If not specified, the 'netcat' utility will be used by default.
+   - `method` - the utility used for checking the port status. Available values are : 'netcat','nmap'. If not specified, the netcat utility will be used by default.
    - `portStatusFunction` - a custom function to be used for checking the availability of the ports.
 
 #### Return value
