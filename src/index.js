@@ -59,12 +59,27 @@ function getPortStatusNc(ip, port) {
   });
 }
 
+function getPortStatus(ip,port,utility) {
+  let func;
+  const method = utility ? utility : 'netcat';
+  switch(method) {
+    case 'netcat':
+      func = getPortStatusNc;
+      break;
+    case 'nmap':
+      func = getPortStatusNmap;
+      break;
+  }
+  return func(ip,port)
+}
+
 async function waitForPort(options) {
   const o = options || {};
   const resources = o.resources || [];
+  const method = o.method || 'netcat';
   const timeout = o.timeout || 120 * 1000; //120 seconds
   const interval = o.interval || 10 * 1000; //try every 10 seconds
-  const portStatusFunction = o.portStatusFunction || getPortStatusNc;
+  const portStatusFunction = o.portStatusFunction || getPortStatus;
   const tcpResources = new Set();
 
   for(const resource of resources) {
@@ -89,7 +104,7 @@ async function waitForPort(options) {
     }
     ++tries;
     for(const resource of tcpResources.values()) {
-      const res = await portStatusFunction(resource.ip, resource.port);
+      const res = await portStatusFunction(resource.ip,resource.port,method);
       if(res.status === 'error') {
         tcpResources.delete(resource);
         checkedServers.push({
@@ -132,8 +147,5 @@ async function waitForPort(options) {
 }
 
 
-export  {
-  getPortStatusNmap,
-  getPortStatusNc,
-  waitForPort 
-}
+export default waitForPort 
+
